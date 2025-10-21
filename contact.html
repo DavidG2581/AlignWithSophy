@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Align with Sophy | Contact</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a class="brand" href="index.html">Align with Sophy</a>
+        <ul class="nav-links">
+          <li><a href="hatha.html">Hatha Yoga</a></li>
+          <li><a href="vinyasa.html">Vinyasa Yoga</a></li>
+          <li><a href="yin.html">Yin Yoga</a></li>
+          <li><a href="restorative.html">Restorative Yoga</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <header>
+      <h1>Book a Private Session</h1>
+      <p>
+        Share a few details about the experience you are seeking, and I will
+        reach out to schedule your personalized yoga session.
+      </p>
+    </header>
+
+    <main>
+      <section class="content-section">
+        <h2>Get in Touch</h2>
+        <form id="contact-form" novalidate>
+          <div class="two-column">
+            <div class="info-card">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" required />
+            </div>
+            <div class="info-card">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Best number to reach you"
+              />
+            </div>
+          </div>
+
+          <div class="info-card">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+
+          <div class="info-card">
+            <label for="message">How can I support your practice?</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Let me know your goals, preferred style, availability, or any questions."
+            ></textarea>
+          </div>
+
+          <button type="submit">Send Message</button>
+          <p id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Align with Sophy. All rights reserved.
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const form = document.getElementById("contact-form");
+      const status = document.getElementById("form-status");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        status.textContent = "Sending...";
+
+        const formData = {
+          name: form.name.value.trim(),
+          phone: form.phone.value.trim(),
+          email: form.email.value.trim(),
+          message: form.message.value.trim(),
+        };
+
+        if (!formData.name || !formData.email) {
+          status.textContent = "Please provide both your name and email.";
+          return;
+        }
+
+        try {
+          const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+
+          if (!response.ok) throw new Error("Request failed");
+
+          form.reset();
+          status.textContent = "Thank you! Your message has been sent.";
+        } catch (error) {
+          status.textContent =
+            "Sorry, something went wrong while sending your message. Please try again later.";
+        }
+      });
+    </script>
+  </body>
+</html>
