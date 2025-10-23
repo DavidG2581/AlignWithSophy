@@ -78,6 +78,7 @@
       © <span id="year"></span> Align with Sophy. All rights reserved.
     </footer>
 
+    <script src="config.js"></script>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -100,8 +101,16 @@
           return;
         }
 
+        const apiEndpoint = window.CONTACT_API_URL;
+        if (!apiEndpoint) {
+          console.error("CONTACT_API_URL is not set. Update config.js with your API Gateway URL.");
+          status.textContent =
+            "Contact form is not configured yet. Please reach out directly by email.";
+          return;
+        }
+
         try {
-          const response = await fetch("/api/contact", {
+          const response = await fetch(apiEndpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
