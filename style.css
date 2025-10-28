@@ -84,6 +84,74 @@ nav {
   color: #1f2609;
 }
 
+.nav-links .user-menu {
+  position: relative;
+}
+
+.nav-links .user-menu button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: var(--text-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-links .user-menu button:hover,
+.nav-links .user-menu button:focus {
+  background-color: rgba(205, 220, 132, 0.3);
+  color: var(--primary-dark);
+}
+
+.nav-links .user-menu button::after {
+  content: "\25BE";
+  font-size: 0.75rem;
+}
+
+.user-menu .menu {
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background: var(--surface-color);
+  box-shadow: 0 12px 28px -18px rgba(0, 0, 0, 0.35);
+  border-radius: 0.75rem;
+  padding: 0.5rem 0;
+  min-width: 12rem;
+  display: none;
+  z-index: 200;
+}
+
+.user-menu .menu a,
+.user-menu .menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 1rem;
+  background: none;
+  border: none;
+  font: inherit;
+  color: var(--text-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.user-menu .menu a:hover,
+.user-menu .menu a:focus,
+.user-menu .menu button:hover,
+.user-menu .menu button:focus {
+  background-color: rgba(205, 220, 132, 0.15);
+  color: var(--primary-dark);
+}
+
+.user-menu.open .menu {
+  display: block;
+}
+
 header {
   background: url("https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
   color: #ffffff;

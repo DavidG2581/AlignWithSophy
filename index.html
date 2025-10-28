@@ -18,8 +18,8 @@
           <li><a href="restorative.html">Restorative</a></li>
           <li><a href="members.html">Members</a></li>
           <li><a href="video-library.html">Programs</a></li>
-          <li><a href="index.html#member-access">Login</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li class="login-link" id="nav-auth"><a href="index.html#member-access">Login</a></li>
         </ul>
       </div>
     </nav>
@@ -153,6 +153,7 @@
               name="email"
               type="email"
               autocomplete="email"
+              inputmode="email"
               required
             />
 
@@ -163,6 +164,8 @@
               type="text"
               autocomplete="username"
               placeholder="Leave blank to use your email"
+              minlength="5"
+              maxlength="20"
             />
 
             <label for="signup-password">Password</label>
@@ -171,8 +174,13 @@
               name="password"
               type="password"
               autocomplete="new-password"
+              minlength="8"
+              title="At least 8 characters, 2 uppercase letters, 2 numbers, and 1 special character."
               required
             />
+            <p class="form-helper">
+              Password must include at least 8 characters, 2 uppercase letters, 2 numbers, and 1 special character.
+            </p>
 
             <label for="signup-confirm">Confirm Password</label>
             <input
@@ -242,6 +250,7 @@
       &copy; <span id="year"></span> Align with Sophy. All rights reserved.
     </footer>
 
+    <script src="main.js"></script>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -258,8 +267,16 @@
       };
       const refreshBtn = document.getElementById("refresh-profile");
 
+      const REGISTERED_USERS_KEY = "alignWithSophyRegisteredUsers";
+      const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const USERNAME_REGEX = /^[A-Za-z0-9._-]+$/;
+
       function toggleProfileVisibility(show) {
         profileForm.classList.toggle("hidden", !show);
+        if (!show) {
+          profileForm.reset();
+          profileFields.age.textContent = "--";
+        }
       }
 
       function calculateAge(dateString) {
@@ -282,37 +299,149 @@
         profileFields.firstName.value = profile.firstName ?? "";
         profileFields.lastName.value = profile.lastName ?? "";
         profileFields.email.value = profile.email ?? "";
-        if (profile.dob) {
-          profileFields.dob.value = profile.dob;
-        }
+        profileFields.dob.value = profile.dob ?? "";
         profileFields.age.textContent = calculateAge(profileFields.dob.value);
+      }
+
+      function getRegisteredUsers() {
+        try {
+          const raw = localStorage.getItem(REGISTERED_USERS_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch (error) {
+          console.warn("Unable to parse registered users", error);
+          return [];
+        }
+      }
+
+      function saveRegisteredUsers(users) {
+        localStorage.setItem(REGISTERED_USERS_KEY, JSON.stringify(users));
+      }
+
+      function findRegisteredUser(identifier) {
+        if (!identifier) return undefined;
+        const normalized = identifier.toLowerCase();
+        return getRegisteredUsers().find(
+          (entry) =>
+            entry.email === normalized ||
+            (entry.usernameLower && entry.usernameLower === normalized)
+        );
+      }
+
+      function isUsernameValid(username) {
+        return (
+          username.length >= 5 &&
+          username.length <= 20 &&
+          USERNAME_REGEX.test(username)
+        );
+      }
+
+      function validatePassword(password) {
+        if (password.length < 8) {
+          return {
+            valid: false,
+            message: "Password must be at least 8 characters long.",
+          };
+        }
+        const uppercaseMatches = password.match(/[A-Z]/g) || [];
+        const digitMatches = password.match(/[0-9]/g) || [];
+        const specialMatches = password.match(/[^A-Za-z0-9]/g) || [];
+        if (uppercaseMatches.length < 2) {
+          return {
+            valid: false,
+            message: "Password needs at least 2 uppercase letters.",
+          };
+        }
+        if (digitMatches.length < 2) {
+          return {
+            valid: false,
+            message: "Password needs at least 2 numbers.",
+          };
+        }
+        if (specialMatches.length < 1) {
+          return {
+            valid: false,
+            message: "Password needs at least 1 special character.",
+          };
+        }
+        return { valid: true };
+      }
+
+      function generateUsernameFromEmail(email, users) {
+        const localPart = email.split("@")[0].replace(/[^A-Za-z0-9._-]/g, "");
+        let base = localPart || "member";
+        while (base.length < 5) {
+          base += Math.floor(Math.random() * 10).toString();
+        }
+        base = base.slice(0, 20);
+        let candidate = base;
+        let suffix = 1;
+        const taken = new Set(
+          users
+            .map((entry) => entry.usernameLower)
+            .filter(Boolean)
+        );
+        while (taken.has(candidate.toLowerCase()) && suffix < 1000) {
+          const trimmed = base.slice(
+            0,
+            Math.max(0, 20 - suffix.toString().length)
+          );
+          candidate = `${trimmed}${suffix}`;
+          suffix += 1;
+        }
+        return candidate;
+      }
+
+      function mapUserToProfile(user) {
+        return {
+          username: user.username,
+          email: user.emailDisplay ?? user.email,
+          firstName: user.firstName ?? "Yoga",
+          lastName: user.lastName ?? "Practitioner",
+          dob: user.dob ?? "",
+        };
       }
 
       async function authenticateWithCognito(identifier, password) {
         // TODO: Replace this placeholder with Amazon Cognito SDK integration.
-        // Example using amazon-cognito-identity-js:
-        // const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({ Username: identifier, Password: password });
-        // const userData = { Username: identifier, Pool: userPool };
-        // const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-        // return await new Promise((resolve, reject) => {
-        //   cognitoUser.authenticateUser(authenticationDetails, {
-        //     onSuccess: resolve,
-        //     onFailure: reject,
-        //   });
-        // });
-
         console.info(
           "Cognito authentication placeholder invoked. Replace authenticateWithCognito with live implementation."
         );
 
-        // Mocked response for front-end preview only.
-        return {
-          username: identifier,
-          firstName: "Yoga",
-          lastName: "Practitioner",
-          email: identifier.includes("@") ? identifier : "member@example.com",
-          dob: "1990-01-01",
-        };
+        const normalizedIdentifier = identifier.toLowerCase();
+        const users = getRegisteredUsers();
+        const user = users.find(
+          (entry) =>
+            entry.email === normalizedIdentifier ||
+            (entry.usernameLower && entry.usernameLower === normalizedIdentifier)
+        );
+
+        if (!user) {
+          throw new Error("No account found for that username or email.");
+        }
+
+        if (!password) {
+          throw new Error("Password is required to sign in.");
+        }
+
+        if (user.password !== password) {
+          throw new Error("Incorrect password. Please try again.");
+        }
+
+        if (!user.verified) {
+          throw new Error("Please verify your email before signing in.");
+        }
+
+        if (
+          user.verificationDeadline &&
+          Date.now() > user.verificationDeadline &&
+          !user.verified
+        ) {
+          throw new Error(
+            "Email verification has expired. Please restart the sign-up process."
+          );
+        }
+
+        return mapUserToProfile(user);
       }
 
       async function registerWithCognito({ email, username, password }) {
@@ -321,11 +450,66 @@
           "Cognito registration placeholder invoked. Replace registerWithCognito with live implementation."
         );
 
-        // Mocked response for front-end preview only.
+        const normalizedEmail = email.toLowerCase();
+        if (!EMAIL_REGEX.test(normalizedEmail)) {
+          throw new Error("Please enter a valid email address.");
+        }
+
+        const trimmedUsername = username.trim();
+        if (trimmedUsername && !isUsernameValid(trimmedUsername)) {
+          throw new Error(
+            "Username must be 5-20 characters using letters, numbers, dots, underscores, or hyphens."
+          );
+        }
+
+        const passwordCheck = validatePassword(password);
+        if (!passwordCheck.valid) {
+          throw new Error(passwordCheck.message);
+        }
+
+        const users = getRegisteredUsers();
+        if (users.some((entry) => entry.email === normalizedEmail)) {
+          throw new Error("An account already exists with that email address.");
+        }
+
+        let usernameToStore =
+          trimmedUsername ||
+          generateUsernameFromEmail(normalizedEmail, users);
+
+        if (
+          users.some(
+            (entry) =>
+              entry.usernameLower &&
+              entry.usernameLower === usernameToStore.toLowerCase()
+          )
+        ) {
+          throw new Error("That username is already taken. Please choose another.");
+        }
+
+        const verificationDeadline = Date.now() + 1000 * 60 * 60 * 24 * 3;
+        const newUser = {
+          email: normalizedEmail,
+          emailDisplay: email,
+          username: usernameToStore,
+          usernameLower: usernameToStore.toLowerCase(),
+          password,
+          verified: true, // Configure Cognito to keep users UNCONFIRMED until they verify email.
+          verificationDeadline,
+          createdAt: Date.now(),
+        };
+
+        users.push(newUser);
+        saveRegisteredUsers(users);
+
+        console.info(
+          "Ensure your Cognito User Pool enforces email verification with a 3-day expiration."
+        );
+
         return {
-          email,
-          username: username || email.split("@")[0],
+          email: email,
+          username: usernameToStore,
           requiresConfirmation: true,
+          verificationDeadline: new Date(verificationDeadline).toISOString(),
         };
       }
 
@@ -342,10 +526,15 @@
           const profile = await authenticateWithCognito(identifier, password);
           populateProfile(profile);
           toggleProfileVisibility(true);
+          if (window.AuthNav?.setProfile) {
+            window.AuthNav.setProfile(profile);
+          }
+          loginForm.reset();
         } catch (error) {
           console.error("Cognito sign-in failed", error);
           alert(
-            "Sign-in could not be completed. Please check your credentials and try again."
+            error?.message ||
+              "Sign-in could not be completed. Please check your credentials and try again."
           );
         }
       });
@@ -366,16 +555,24 @@
 
           try {
             const response = await registerWithCognito({ email, username, password });
-            loginForm.identifier.value = username || email;
+            loginForm.identifier.value = response.username || email;
+            const verificationMessage = response.verificationDeadline
+              ? ` Please verify your email before ${new Date(
+                  response.verificationDeadline
+                ).toLocaleString()}.`
+              : "";
             alert(
               response.requiresConfirmation
-                ? "Sign-up successful! Check your email to confirm your account before signing in."
+                ? `Sign-up successful! Check your email to confirm your account.${verificationMessage}`
                 : "Sign-up successful! You can now sign in."
             );
             signupForm.reset();
           } catch (error) {
             console.error("Cognito sign-up failed", error);
-            alert("We could not complete your sign-up. Please try again later.");
+            alert(
+              error?.message ||
+                "We could not complete your sign-up. Please try again later."
+            );
           }
         });
       }
@@ -384,21 +581,59 @@
         profileFields.age.textContent = calculateAge(profileFields.dob.value);
       });
 
-      refreshBtn.addEventListener("click", async () => {
-        const identifier = profileFields.email.value || profileFields.username.value;
-        if (!identifier) return;
-        try {
-          const profile = await authenticateWithCognito(identifier, "");
-          populateProfile(profile);
-          alert("Profile refreshed from Cognito.");
-        } catch (error) {
-          console.error("Cognito refresh failed", error);
-          alert("Unable to refresh profile details right now.");
+      refreshBtn.addEventListener("click", () => {
+        const activeProfile = window.AuthNav?.getProfile
+          ? window.AuthNav.getProfile()
+          : null;
+        const lookupValue =
+          activeProfile?.username ||
+          activeProfile?.email ||
+          profileFields.email.value ||
+          profileFields.username.value;
+
+        if (!lookupValue) {
+          alert("Please sign in to load your latest profile details.");
+          return;
         }
+
+        const userRecord = findRegisteredUser(lookupValue);
+        if (!userRecord) {
+          alert("Unable to refresh profile details right now.");
+          return;
+        }
+
+        const profile = mapUserToProfile(userRecord);
+        populateProfile(profile);
+        if (window.AuthNav?.setProfile) {
+          window.AuthNav.setProfile(profile);
+        }
+        alert("Profile refreshed from stored account data.");
       });
+
+      document.addEventListener("auth:login", (event) => {
+        if (!event.detail) return;
+        populateProfile(event.detail);
+        toggleProfileVisibility(true);
+      });
+
+      document.addEventListener("auth:logout", () => {
+        toggleProfileVisibility(false);
+        loginForm.reset();
+      });
+
+      const storedProfile = window.AuthNav?.getProfile
+        ? window.AuthNav.getProfile()
+        : null;
+      if (storedProfile) {
+        populateProfile(storedProfile);
+        toggleProfileVisibility(true);
+      } else {
+        toggleProfileVisibility(false);
+      }
     </script>
   </body>
 </html>
+
 
 
 

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Align with Sophy | Account Management</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a class="brand" href="index.html">Align with Sophy</a>
+        <ul class="nav-links">
+          <li class="home-link"><a href="index.html">Home</a></li>
+          <li><a href="hatha.html">Hatha</a></li>
+          <li><a href="vinyasa.html">Vinyasa</a></li>
+          <li><a href="yin.html">Yin</a></li>
+          <li><a href="restorative.html">Restorative</a></li>
+          <li><a href="members.html">Members</a></li>
+          <li><a href="video-library.html">Programs</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li class="login-link" id="nav-auth"><a href="index.html#member-access">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <h1>Account Management</h1>
+      <p>
+        Update your membership, payment details, and personal information in one place.
+      </p>
+      <a class="hero-cta" href="index.html#member-access">Manage Profile</a>
+    </header>
+
+    <main>
+      <section class="content-section" id="membership">
+        <h2>Membership Status</h2>
+        <p>
+          Use the Member Portal to toggle between free and paid tiers, pause billing, or cancel your plan entirely.
+          The portal connects directly to your Amazon Cognito User Pool and payment provider so your access level
+          updates immediately after checkout.
+        </p>
+        <ul>
+          <li><a href="members.html">Open the Members page</a> to review premium benefits.</li>
+          <li>
+            After confirming payment, refresh your profile under <a href="index.html#member-access">Member Login</a>
+            to unlock premium-only content.
+          </li>
+          <li>
+            Cancelling your subscription automatically downgrades your Cognito account to the free tier while
+            preserving your practice history.
+          </li>
+        </ul>
+      </section>
+
+      <section class="content-section" id="profile">
+        <h2>Profile Information</h2>
+        <p>
+          Keep your contact details current so we can send practice reminders and billing notices. Any updates you
+          make here sync with Amazon Cognito attributes.
+        </p>
+        <div class="two-column">
+          <div class="info-card">
+            <h3>Update Contact Details</h3>
+            <p>
+              Visit the <a href="index.html#member-access">Member Login</a> section to update your name, email, and
+              date of birth. The portal recalculates your age automatically whenever you adjust your birthday.
+            </p>
+          </div>
+          <div class="info-card">
+            <h3>Change Password</h3>
+            <p>
+              Use the password reset option provided by Amazon Cognito to set a new password. Be sure to follow the
+              password rules enforced during sign-up (minimum 8 characters, 2 uppercase letters, 2 numbers, and 1
+              special character).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" id="payments">
+        <h2>Update Payment Method</h2>
+        <p>
+          Our third-party billing tool manages your payment information securely. Launch the billing portal to add a
+          new card, update an expiration date, or download receipts.
+        </p>
+        <ul>
+          <li>
+            Once payment changes are confirmed, Cognito attribute triggers can flag your account as paid without any
+            manual intervention.
+          </li>
+          <li>
+            For failed payments, the system automatically notifies you and temporarily restricts premium access until
+            the issue is resolved.
+          </li>
+        </ul>
+      </section>
+
+      <section class="content-section" id="danger-zone">
+        <h2>Delete Account</h2>
+        <p>
+          Need to close your account? Deleting your profile permanently removes your Cognito user record and any saved
+          preferences. Premium access will terminate immediately.
+        </p>
+        <ul>
+          <li>Contact support to verify your identity before an account deletion request is processed.</li>
+          <li>
+            Automate deletions by wiring the dropdown delete option to a protected API that calls Cognito AdminDeleteUser.
+          </li>
+          <li>
+            Consider exporting any practice logs or invoices beforehand—we cannot restore a deleted account.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      &copy; <span id="year"></span> Align with Sophy. All rights reserved.
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
