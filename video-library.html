@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Align with Sophy | Programs</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a class="brand" href="index.html">Align with Sophy</a>
+        <ul class="nav-links">
+          <li class="home-link"><a href="index.html">Home</a></li>
+          <li><a href="hatha.html">Hatha</a></li>
+          <li><a href="vinyasa.html">Vinyasa</a></li>
+          <li><a href="yin.html">Yin</a></li>
+          <li><a href="restorative.html">Restorative</a></li>
+          <li><a href="members.html">Members</a></li>
+          <li><a href="video-library.html">Programs</a></li>
+          <li><a href="index.html#member-access">Login</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <h1>Programs</h1>
+      <p>
+        Stream curated YouTube collections and premium bundles for every stage
+        of your practice.
+      </p>
+      <a class="hero-cta" href="index.html#member-access">Sign In to Purchase</a>
+    </header>
+
+    <main>
+      <section class="content-section">
+        <h2>How Access Works</h2>
+        <p>
+          Both free and paid members can purchase curated video bundles. Paid
+          members receive automatic discounts and immediate access to premium
+          releases. Every purchase is tied to your Amazon Cognito profile, so
+          your streaming permissions travel with you across devices.
+        </p>
+        <p>
+          Add new playlists by embedding their YouTube URLs into the sections
+          below. Each playlist card can include a price, description, and call
+          to action that connects to your chosen checkout provider.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>Featured Bundles</h2>
+        <div class="style-grid">
+          <article class="style-card">
+            <h3>Morning Energy Flow</h3>
+            <p>
+              Start your day with an uplifting sequence of short vinyasa
+              classes. Ideal for all levels and great for busy schedules.
+            </p>
+            <p class="form-helper">$15.00 - Available to all members</p>
+          </article>
+          <article class="style-card">
+            <h3>Deep Relaxation Set</h3>
+            <p>
+              A soothing yin and restorative blend designed to calm the nervous
+              system and prepare you for restful sleep.
+            </p>
+            <p class="form-helper">$18.00 - Free for paid members</p>
+          </article>
+          <article class="style-card">
+            <h3>Strength & Stability Lab</h3>
+            <p>
+              Build heat with progressive flows focused on core activation and
+              lower-body stability.
+            </p>
+            <p class="form-helper">$22.00 - Includes downloadable sequences</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Ready for Your Programs</h2>
+        <p>
+          Paste your YouTube iframe snippets within this section to embed your
+          playlists. Each embed can be wrapped in a <code>div</code> with the
+          class <code>video-wrapper</code> for responsive sizing.
+        </p>
+        <div class="video-wrapper">
+          <iframe
+            title="Placeholder video"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      &copy; <span id="year"></span> Align with Sophy. All rights reserved.
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
+
+
+
+

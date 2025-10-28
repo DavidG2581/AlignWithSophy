@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Align with Sophy | Private Sessions</title>
+    <title>Align with Sophy | Online Yoga Training</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -11,61 +11,395 @@
       <div class="nav-container">
         <a class="brand" href="index.html">Align with Sophy</a>
         <ul class="nav-links">
-          <li><a href="hatha.html">Hatha Yoga</a></li>
-          <li><a href="vinyasa.html">Vinyasa Yoga</a></li>
-          <li><a href="yin.html">Yin Yoga</a></li>
-          <li><a href="restorative.html">Restorative Yoga</a></li>
+          <li class="home-link"><a href="index.html">Home</a></li>
+          <li><a href="hatha.html">Hatha</a></li>
+          <li><a href="vinyasa.html">Vinyasa</a></li>
+          <li><a href="yin.html">Yin</a></li>
+          <li><a href="restorative.html">Restorative</a></li>
+          <li><a href="members.html">Members</a></li>
+          <li><a href="video-library.html">Programs</a></li>
+          <li><a href="index.html#member-access">Login</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
     </nav>
 
-    <header>
-      <h1>Align with Sophy</h1>
-      <h1>TEST - UPLOAD6 - test from work desktop</h1> 
-      <p>
-        Private yoga sessions designed to cultivate balance, healing, and
-        mindful movement in the comfort of your chosen space.
-      </p>
+    <header class="hero">
+      <h1>Align with Sophy Online</h1>
+      <p>Personalized online yoga training that meets you wherever you are.</p>
+      <a class="hero-cta" href="#about">Discover Your Flow</a>
     </header>
 
     <main>
-      <section class="content-section">
-        <h2>Welcome to Your Personal Practice</h2>
+      <section id="about" class="content-section intro">
+        <h2>Online Yoga Crafted for Your Life</h2>
         <p>
-          Use this space to introduce your philosophy, your background, and what
-          clients can expect when they book a private session with Align with
-          Sophy. Feel free to share your teaching style, experience, or any
-          specialties you bring to your sessions.
+          Align with Sophy delivers live and on-demand yoga sessions that adapt
+          to your needs, schedule, and space. Whether you are beginning your
+          practice or expanding your journey, our virtual studio pairs mindful
+          sequencing with compassionate coaching to deepen strength, mobility,
+          and self-connection.
         </p>
         <p>
-          Add additional details here about how you tailor each class to the
-          individual, the energy you cultivate, or any unique offerings such as
-          breathwork, meditation, or seasonal themes.
+          Choose from guided classes, private coaching, and curated learning
+          paths that blend breathwork, meditation, and restorative tools. Free
+          members enjoy regular community updates and select classes, while paid
+          members unlock premium video courses, downloadable resources, and an
+          exclusive member portal for tracking progress.
         </p>
       </section>
 
-      <section class="content-section">
-        <h2>Moments of Serenity</h2>
-        <div class="image-grid">
-          <img
-            src="https://via.placeholder.com/600x400?text=Replace+with+your+yoga+photo+1"
-            alt="Placeholder for a calming yoga scene"
-          />
-          <img
-            src="https://via.placeholder.com/600x400?text=Replace+with+your+yoga+photo+2"
-            alt="Placeholder for an inspiring yoga moment"
-          />
+      <section class="content-section practice-overview">
+        <h2>Explore Our Signature Yoga Paths</h2>
+        <div class="style-grid">
+          <article class="style-card">
+            <h3><a href="hatha.html">Hatha Yoga</a></h3>
+            <p>
+              Slow, steady alignment-focused practices that build confidence
+              through foundational postures and mindful breath awareness.
+            </p>
+          </article>
+          <article class="style-card">
+            <h3><a href="vinyasa.html">Vinyasa Yoga</a></h3>
+            <p>
+              Dynamic, breath-led flows designed to generate heat, cultivate
+              stamina, and encourage creative movement transitions.
+            </p>
+          </article>
+          <article class="style-card">
+            <h3><a href="yin.html">Yin Yoga</a></h3>
+            <p>
+              Nourishing holds that target connective tissues, invite stillness,
+              and create space for deep release and reflection.
+            </p>
+          </article>
+          <article class="style-card">
+            <h3><a href="restorative.html">Restorative Yoga</a></h3>
+            <p>
+              Gentle, prop-supported sequences that soothe the nervous system
+              and guide you into profound restfulness.
+            </p>
+          </article>
         </div>
+      </section>
+
+      <section class="content-section membership">
+        <h2>Membership Tiers & Premium Access</h2>
+        <div class="two-column">
+          <div class="info-card">
+            <h3>Free Community Membership</h3>
+            <ul>
+              <li>Monthly live community class invitations</li>
+              <li>Wellness newsletters with practice tips</li>
+              <li>
+                Access to purchasable YouTube bundles on the
+                <a href="video-library.html">Programs page</a>
+              </li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3>Paid Studio Membership</h3>
+            <ul>
+              <li>Unlimited access to premium video courses</li>
+              <li>
+                Guided programs inside the <a href="members.html">Members hub</a>
+              </li>
+              <li>Personalized practice roadmap and progress tracking</li>
+            </ul>
+          </div>
+        </div>
+        <p>
+          We partner with a secure third-party payment solution. Once a payment
+          is confirmed, the associated Amazon Cognito user account is upgraded,
+          automatically granting access to the member-only content hub.
+        </p>
+      </section>
+
+      <section id="member-access" class="content-section member-access">
+        <h2>Member Login & Profile</h2>
+        <div class="auth-grid">
+          <form id="login-form" class="info-card" aria-describedby="login-help">
+            <h3>Sign In</h3>
+            <label for="login-identifier">Username or Email</label>
+            <input
+              id="login-identifier"
+              name="identifier"
+              type="text"
+              autocomplete="username"
+              required
+            />
+
+            <label for="login-password">Password</label>
+            <input
+              id="login-password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+
+            <button type="submit">Sign In</button>
+            <p id="login-help" class="form-helper">
+              Credentials are securely managed with Amazon Cognito User Pools.
+              Use the same username or email you registered with.
+            </p>
+          </form>
+
+          <form id="signup-form" class="info-card" aria-describedby="signup-help">
+            <h3>Create Account</h3>
+            <label for="signup-email">Email</label>
+            <input
+              id="signup-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+            />
+
+            <label for="signup-username">Preferred Username (optional)</label>
+            <input
+              id="signup-username"
+              name="username"
+              type="text"
+              autocomplete="username"
+              placeholder="Leave blank to use your email"
+            />
+
+            <label for="signup-password">Password</label>
+            <input
+              id="signup-password"
+              name="password"
+              type="password"
+              autocomplete="new-password"
+              required
+            />
+
+            <label for="signup-confirm">Confirm Password</label>
+            <input
+              id="signup-confirm"
+              name="confirm-password"
+              type="password"
+              autocomplete="new-password"
+              required
+            />
+
+            <button type="submit">Sign Up</button>
+            <p id="signup-help" class="form-helper">
+              New members receive a confirmation email after registration. Once
+              verified, sign in to access your dashboard.
+            </p>
+          </form>
+
+          <form
+            id="profile-form"
+            class="info-card hidden auth-full"
+            aria-live="polite"
+          >
+            <h3>User Profile</h3>
+            <div class="form-grid">
+              <label for="profile-username">Username</label>
+              <input id="profile-username" name="username" type="text" readonly />
+
+              <label for="profile-first-name">First Name</label>
+              <input id="profile-first-name" name="first-name" type="text" />
+
+              <label for="profile-last-name">Last Name</label>
+              <input id="profile-last-name" name="last-name" type="text" />
+
+              <label for="profile-email">Email</label>
+              <input id="profile-email" name="email" type="email" />
+
+              <label for="profile-dob">Date of Birth</label>
+              <input id="profile-dob" name="dob" type="date" />
+            </div>
+            <p class="age-indicator">
+              Age: <span id="profile-age" data-age>--</span>
+            </p>
+            <p class="form-helper">
+              Profile details sync with Cognito attributes. Updates appear here
+              once saved through the member portal.
+            </p>
+            <div class="profile-actions">
+              <button type="button" id="refresh-profile">Refresh Profile</button>
+              <a class="button-secondary" href="members.html">Go to Members</a>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="content-section video-preview">
+        <h2>On-Demand Programs</h2>
+        <p>
+          Browse curated YouTube playlists and premium course drops inside the
+          <a href="video-library.html">Programs page</a>. Free members can
+          purchase individual bundles, while paid members enjoy discounted
+          access and exclusive releases.
+        </p>
       </section>
     </main>
 
     <footer>
-      © <span id="year"></span> Align with Sophy. All rights reserved.
+      &copy; <span id="year"></span> Align with Sophy. All rights reserved.
     </footer>
 
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      const loginForm = document.getElementById("login-form");
+      const signupForm = document.getElementById("signup-form");
+      const profileForm = document.getElementById("profile-form");
+      const profileFields = {
+        username: document.getElementById("profile-username"),
+        firstName: document.getElementById("profile-first-name"),
+        lastName: document.getElementById("profile-last-name"),
+        email: document.getElementById("profile-email"),
+        dob: document.getElementById("profile-dob"),
+        age: document.getElementById("profile-age"),
+      };
+      const refreshBtn = document.getElementById("refresh-profile");
+
+      function toggleProfileVisibility(show) {
+        profileForm.classList.toggle("hidden", !show);
+      }
+
+      function calculateAge(dateString) {
+        if (!dateString) return "--";
+        const dob = new Date(dateString);
+        if (Number.isNaN(dob.getTime())) return "--";
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const hasHadBirthdayThisYear =
+          today.getMonth() > dob.getMonth() ||
+          (today.getMonth() === dob.getMonth() && today.getDate() >= dob.getDate());
+        if (!hasHadBirthdayThisYear) {
+          age -= 1;
+        }
+        return age >= 0 ? age : "--";
+      }
+
+      function populateProfile(profile) {
+        profileFields.username.value = profile.username ?? "";
+        profileFields.firstName.value = profile.firstName ?? "";
+        profileFields.lastName.value = profile.lastName ?? "";
+        profileFields.email.value = profile.email ?? "";
+        if (profile.dob) {
+          profileFields.dob.value = profile.dob;
+        }
+        profileFields.age.textContent = calculateAge(profileFields.dob.value);
+      }
+
+      async function authenticateWithCognito(identifier, password) {
+        // TODO: Replace this placeholder with Amazon Cognito SDK integration.
+        // Example using amazon-cognito-identity-js:
+        // const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({ Username: identifier, Password: password });
+        // const userData = { Username: identifier, Pool: userPool };
+        // const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+        // return await new Promise((resolve, reject) => {
+        //   cognitoUser.authenticateUser(authenticationDetails, {
+        //     onSuccess: resolve,
+        //     onFailure: reject,
+        //   });
+        // });
+
+        console.info(
+          "Cognito authentication placeholder invoked. Replace authenticateWithCognito with live implementation."
+        );
+
+        // Mocked response for front-end preview only.
+        return {
+          username: identifier,
+          firstName: "Yoga",
+          lastName: "Practitioner",
+          email: identifier.includes("@") ? identifier : "member@example.com",
+          dob: "1990-01-01",
+        };
+      }
+
+      async function registerWithCognito({ email, username, password }) {
+        // TODO: Replace this placeholder with Amazon Cognito sign-up integration.
+        console.info(
+          "Cognito registration placeholder invoked. Replace registerWithCognito with live implementation."
+        );
+
+        // Mocked response for front-end preview only.
+        return {
+          email,
+          username: username || email.split("@")[0],
+          requiresConfirmation: true,
+        };
+      }
+
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const identifier = loginForm.identifier.value.trim();
+        const password = loginForm.password.value;
+
+        if (!identifier || !password) return;
+
+        toggleProfileVisibility(false);
+
+        try {
+          const profile = await authenticateWithCognito(identifier, password);
+          populateProfile(profile);
+          toggleProfileVisibility(true);
+        } catch (error) {
+          console.error("Cognito sign-in failed", error);
+          alert(
+            "Sign-in could not be completed. Please check your credentials and try again."
+          );
+        }
+      });
+
+      if (signupForm) {
+        signupForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const email = signupForm.email.value.trim();
+          const username = signupForm.username.value.trim();
+          const password = signupForm.password.value;
+          const confirmPassword = signupForm["confirm-password"].value;
+
+          if (!email || !password || !confirmPassword) return;
+          if (password !== confirmPassword) {
+            alert("Passwords do not match. Please try again.");
+            return;
+          }
+
+          try {
+            const response = await registerWithCognito({ email, username, password });
+            loginForm.identifier.value = username || email;
+            alert(
+              response.requiresConfirmation
+                ? "Sign-up successful! Check your email to confirm your account before signing in."
+                : "Sign-up successful! You can now sign in."
+            );
+            signupForm.reset();
+          } catch (error) {
+            console.error("Cognito sign-up failed", error);
+            alert("We could not complete your sign-up. Please try again later.");
+          }
+        });
+      }
+
+      profileFields.dob.addEventListener("change", () => {
+        profileFields.age.textContent = calculateAge(profileFields.dob.value);
+      });
+
+      refreshBtn.addEventListener("click", async () => {
+        const identifier = profileFields.email.value || profileFields.username.value;
+        if (!identifier) return;
+        try {
+          const profile = await authenticateWithCognito(identifier, "");
+          populateProfile(profile);
+          alert("Profile refreshed from Cognito.");
+        } catch (error) {
+          console.error("Cognito refresh failed", error);
+          alert("Unable to refresh profile details right now.");
+        }
+      });
     </script>
   </body>
 </html>
+
+
+
+
